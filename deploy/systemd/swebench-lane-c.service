@@ -1,0 +1,16 @@
+[Unit]
+Description=SWE-bench Pro Lane C full-set runner
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/swebench-pro-lane-c-simple
+EnvironmentFile=%h/swebench-pro-lane-c-simple/.env
+ExecStart=%h/swebench-pro-lane-c-simple/scripts/run_full.sh
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,8 @@
+PyYAML>=6.0
+datasets>=2.14.0
+docker>=6.0.0
+huggingface_hub>=0.16.0
+litellm>=1.63.0
+pandas>=1.5.0
+tqdm>=4.64.0
+

@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "description": "Snapshot of official Scale SWE-Bench Pro public leaderboard entries for offline comparison.",
+    "updated": "2026-04-19",
+    "benchmark": "Scale SWE-Bench Pro public leaderboard",
+    "benchmark_total_instances": 731,
+    "source_urls": [
+      "https://labs.scale.com/leaderboard/swe_bench_pro_public",
+      "https://scaleapi.github.io/SWE-bench_Pro-os/"
+    ],
+    "notes": "Use the live Scale public leaderboard as source of truth. The static GitHub page currently mentions 730 total problems in its CI note, while the live public leaderboard describes the public set as 731 instances."
+  },
+  "entries": [
+    {
+      "label": "claude-opus-4-6 (thinking)",
+      "resolve_rate": 0.519,
+      "notes": "Scale public leaderboard snapshot on 2026-04-19."
+    },
+    {
+      "label": "claude-opus-4-5-20251101",
+      "resolve_rate": 0.4589,
+      "notes": "Scale public leaderboard snapshot on 2026-04-19."
+    },
+    {
+      "label": "claude-4-5-Sonnet",
+      "resolve_rate": 0.436,
+      "notes": "Scale public leaderboard snapshot on 2026-04-19."
+    },
+    {
+      "label": "qwen3-coder-480b-a35b",
+      "resolve_rate": 0.387,
+      "notes": "Scale public leaderboard snapshot on 2026-04-19."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+# Lane C full public set
+lane_id: lane-c-full-qwen-telos
+description: "Full public set: 731 instances x 8 agents"
+
+# Model
+model: openrouter/qwen/qwen3-coder
+agent_count: 8
+agent_temperatures: [0.2, 0.3, 0.5, 0.7, 0.9, 1.0, 0.4, 0.6]
+
+# Telos
+telos_mode: live
+telos_base_url: https://telos-core-production.up.railway.app
+
+# Official SWE-bench Pro checkout
+official_repo_path: vendor/SWE-bench_Pro-os
+dataset_jsonl: helper_code/sweap_eval_full_v2.jsonl
+run_scripts_dir: run_scripts
+eval_script: swe_bench_pro_eval.py
+
+# Local data
+instances_path: data/public-test-instance-ids.txt
+leaderboard_json: data/leaderboard-frontier.json
+output_root: output
+
+# Execution
+max_turns: 80
+max_wall_clock_sec: 1800
+docker_timeout_sec: 600
+docker_remove_image_after_instance: true
+docker_prune_after_instance: true
+
+# Evaluation
+eval_num_workers: 1
+
