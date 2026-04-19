@@ -43,6 +43,55 @@ nohup ./scripts/run_full.sh > runner.log 2>&1 &
 tail -f runner.log
 ```
 
+## doctl で Droplet を作る
+
+手元の Mac か Linux で `doctl` を使う前提。
+
+DigitalOcean 公式 docs で確認した current CLI は `doctl compute droplet create <name> --size ... --image ... --region ...` 形式。
+
+```bash
+brew install doctl
+doctl auth init --context personal
+doctl compute ssh-key list
+```
+
+`doctl compute ssh-key list` で使う key fingerprint を確認したら、4 GB 構成で Droplet を作る。
+
+```bash
+export DO_CONTEXT=personal
+export DROPLET_NAME=swebench-lane-c-01
+export REGION=sgp1
+export SIZE=s-2vcpu-4gb
+export IMAGE=ubuntu-24-04-x64
+export SSH_FINGERPRINT='<your-ssh-key-fingerprint>'
+
+doctl --context "$DO_CONTEXT" compute droplet create "$DROPLET_NAME" \
+  --region "$REGION" \
+  --image "$IMAGE" \
+  --size "$SIZE" \
+  --ssh-keys "$SSH_FINGERPRINT" \
+  --tag-names swebench-lane-c \
+  --enable-monitoring \
+  --enable-ipv6 \
+  --wait
+```
+
+Droplet ID と public IP を確認:
+
+```bash
+doctl --context "$DO_CONTEXT" compute droplet list --tag-name swebench-lane-c
+```
+
+SSH だけ開ける firewall:
+
+```bash
+doctl --context "$DO_CONTEXT" compute firewall create \
+  --name swebench-lane-c-ssh \
+  --inbound-rules "protocol:tcp,ports:22,address:0.0.0.0/0 protocol:tcp,ports:22,address:::/0" \
+  --outbound-rules "protocol:tcp,ports:1-65535,address:0.0.0.0/0 protocol:tcp,ports:1-65535,address:::/0 protocol:udp,ports:1-65535,address:0.0.0.0/0 protocol:udp,ports:1-65535,address:::/0 protocol:icmp,address:0.0.0.0/0 protocol:icmp,address:::/0" \
+  --tag-names swebench-lane-c
+```
+
 ## systemd で動かす
 
 clone 先を `~/swebench-pro-lane-c-simple` にした場合:
